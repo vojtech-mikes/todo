@@ -2,6 +2,8 @@
 
 I wanted simple cli todo so i wrote simple cli todo...
 
+> todofile is located in `~/Documents/todofile`
+
 ## Install instructions
 
 1. clone repo
