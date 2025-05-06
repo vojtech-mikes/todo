@@ -1,0 +1,3 @@
+# Simple CLI TODO
+
+I wanted simple cli todo so i wrote simple cli todo...
