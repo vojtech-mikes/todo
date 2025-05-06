@@ -42,7 +42,6 @@ def list_todo(todo_file_path: pathlib.Path):
     headers = ["Index", "Timestamp", "Todo"]
     lines = []
 
-
     with open(todo_file_path, "r") as file:
         for line in file:
             lines.append(line.split(";"))
@@ -105,11 +104,6 @@ def main() -> None:
             list_todo(_todo_file_path)
         except AssertionError as e: perror(e)
     else:
-        if args["list"]:
-            try:
-                list_todo(_todo_file_path)
-            except AssertionError as e: perror(e)
-
         if args["nuke"]:
             try:
                 nuke_todo(_todo_file_path)
@@ -124,5 +118,10 @@ def main() -> None:
         elif args["update"] is not None:
             try:
                 update_record(int(args["update"][0]), args["update"][1], _todo_file_path)
+            except AssertionError as e: perror(e)
+        
+        if args["list"]:
+            try:
+                list_todo(_todo_file_path)
             except AssertionError as e: perror(e)
 

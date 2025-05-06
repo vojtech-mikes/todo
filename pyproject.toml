@@ -1,6 +1,6 @@
 [project]
 name = "todo"
-version = "0.1.1"
+version = "0.1.2"
 description = "Simple CLI todo list"
 authors = [{ name = "Vojtech Mikes"}]
 requires-python = ">=3.13"
