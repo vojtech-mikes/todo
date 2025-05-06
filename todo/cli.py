@@ -87,13 +87,14 @@ def update_record(index: int, new_todo: str, todo_file_path: pathlib.Path) -> No
 def main() -> None:
     main_parser = argparse.ArgumentParser()
 
+    main_parser.add_argument("--list", action="store_true", help="List the todo list file")
+
     group = main_parser.add_mutually_exclusive_group()
 
     group.add_argument("--add", type=str, help="Add item to the end of todo list")
     group.add_argument("--rm", type=int, help="Remove item from todo list by index", nargs="*")
     group.add_argument("--update", help="Update item from todo list by index", nargs=2)
     group.add_argument("--nuke", action="store_true", help="Nuke the todo list file")
-    group.add_argument("--list", action="store_true", help="List the todo list file")
 
     args = vars(main_parser.parse_args())
 
@@ -108,7 +109,8 @@ def main() -> None:
             try:
                 list_todo(_todo_file_path)
             except AssertionError as e: perror(e)
-        elif args["nuke"]:
+
+        if args["nuke"]:
             try:
                 nuke_todo(_todo_file_path)
                 print("Nuked todo file")
