@@ -1,0 +1,16 @@
+[project]
+name = "todo"
+version = "0.1.0"
+description = "Simple CLI todo list"
+authors = [{ name = "Vojtech Mikes"}]
+requires-python = ">=3.13"
+dependencies = [
+    "tabulate"
+]
+
+[project.scripts]
+todo = "todo.cli:main"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
