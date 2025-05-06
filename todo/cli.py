@@ -47,9 +47,11 @@ def list_todo(todo_file_path: pathlib.Path):
         for line in file:
             lines.append(line.split(";"))
 
-    table = [headers] + lines 
-
-    print(tabulate.tabulate(table, headers="firstrow"))
+    if len(lines) == 0:
+        print("No todos to display")
+    else:
+        table = [headers] + lines 
+        print(tabulate.tabulate(table, headers="firstrow"))
 
 
 def remove_todo(indexes: List[int], todo_file_path: pathlib.Path) -> None:
@@ -97,13 +99,15 @@ def main() -> None:
 
     _todo_file_path = pathlib.Path("~/Documents/todolist").expanduser()
 
-    print("HELLOOO")
-
     if len(sys.argv) == 1:
-        list_todo(_todo_file_path)
+        try:
+            list_todo(_todo_file_path)
+        except AssertionError as e: perror(e)
     else:
         if args["list"]:
-            list_todo(_todo_file_path)
+            try:
+                list_todo(_todo_file_path)
+            except AssertionError as e: perror(e)
         elif args["nuke"]:
             try:
                 nuke_todo(_todo_file_path)
@@ -112,6 +116,11 @@ def main() -> None:
         elif args["add"] is not None:
             add_record(args["add"], _todo_file_path)
         elif args["rm"] is not None:
-            remove_todo(args["rm"], _todo_file_path)
+            try:
+                remove_todo(args["rm"], _todo_file_path)
+            except AssertionError as e: perror(e)
         elif args["update"] is not None:
-            update_record(int(args["update"][0]), args["update"][1], _todo_file_path)
+            try:
+                update_record(int(args["update"][0]), args["update"][1], _todo_file_path)
+            except AssertionError as e: perror(e)
+
